@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Greetings</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #001f3d; /* Dark blue background */
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        a {
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+        }
+
+            a:hover {
+                transform: scale(1.1);
+                background: linear-gradient(45deg, #feb47b, #ff7e5f);
+            }
+
+        .message {
+            display: none;
+            font-size: 1.5rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: #ffcc00; /* Golden color for message */
+        }
+
+            .message div {
+                margin-bottom: 20px;
+            }
+
+                .message div span {
+                    color: #ff7e5f; /* Highlight color for key terms */
+                }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .gliding-message {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            animation: glide 10s linear infinite;
+            color: #ffffff; /* White color for gliding message */
+        }
+
+        @keyframes glide {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .falling {
+            position: absolute;
+            font-size: 2rem;
+            animation: fall linear infinite;
+            pointer-events: none;
+        }
+
+        .tree {
+            animation-duration: 7s;
+        }
+
+        .light {
+            animation-duration: 5s;
+        }
+
+        @keyframes fall {
+            from {
+                top: -5%;
+            }
+
+            to {
+                top: 110%;
+            }
+        }
+
+        .snow {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: snowFall linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes snowFall {
+            from {
+                transform: translateY(-5%) rotate(0deg);
+            }
+
+            to {
+                transform: translateY(110%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="#" onclick="showSurprise()">Celebrate the Season</a>
+        <div class="message" id="message">
+            <div>
+                🎄 <span>Mampong Municipal Education Directorate</span> wishes all teachers a joyful Christmas! 🎅✨
+            </div>
+            <div>
+                Thank you for your hard work and dedication. We appreciate everything you do for our students.
+            </div>
+            <div>
+                🎄 <span>Merry Christmas and Happy New Year!</span> 🎅✨
+            </div>
+            <div class="gliding-message">
+                🎄 <span>Stay Safe Until We Resume</span> 🎅✨
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSurprise() {
+            // Hide the button
+            const button = document.querySelector('a');
+            button.style.display = 'none';
+
+            // Show the message
+            const message = document.getElementById('message');
+            message.style.display = 'block';
+
+            // Add Falling Trees and Lights
+            for (let i = 0; i < 30; i++) {
+                const tree = document.createElement('div');
+                tree.classList.add('falling', 'tree');
+                tree.textContent = '🎄';
+                tree.style.left = `${Math.random() * 100}vw`;
+                tree.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(tree);
+
+                const light = document.createElement('div');
+                light.classList.add('falling', 'light');
+                light.textContent = '✨';
+                light.style.left = `${Math.random() * 100}vw`;
+                light.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(light);
+            }
+
+            // Add Snow Effect
+            for (let i = 0; i < 100; i++) {
+                const snow = document.createElement('div');
+                snow.classList.add('snow');
+                snow.style.left = `${Math.random() * 100}vw`;
+                snow.style.width = `${Math.random() * 5 + 2}px`;
+                snow.style.height = snow.style.width;
+                snow.style.animationDelay = `${Math.random() * 3}s`;
+                snow.style.animationDuration = `${3 + Math.random() * 5}s`;
+                document.body.appendChild(snow);
+            }
+
+            // Play Custom Sound from local directory (ensure 'christmas_song.mp3' is in the same folder)
+            const audio = new Audio('song.mp3'); // Replace with your actual file name
+            audio.play().catch((err) => {
+                console.error("Error playing audio: ", err);
+            });
+        }
+    </script>
+</body>
+</html>
